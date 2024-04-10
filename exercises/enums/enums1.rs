@@ -2,16 +2,18 @@
 //
 // No hints this time! ;)
 
-// I AM NOT DONE
 
 #[derive(Debug)]
 enum Message {
-    // TODO: define a few types of messages as used below
+    Quit,
+    Echo,
+    Move { x: i32, y: i32 },
+    ChangeColor(i32, i32, i32),
 }
 
 fn main() {
     println!("{:?}", Message::Quit);
-    println!("{:?}", Message::Echo);
-    println!("{:?}", Message::Move);
-    println!("{:?}", Message::ChangeColor);
+    println!("{:?}", Message::Echo); // 这里Echo不是一个有效的变体，需要更正
+    println!("{:?}", Message::Move { x: 10, y: 20 }); // Move是一个关联了数据的变体，需要提供数据
+    println!("{:?}", Message::ChangeColor(255, 0, 0)); // ChangeColor是一个关联了数据的变体，需要提供数据
 }

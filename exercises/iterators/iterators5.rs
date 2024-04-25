@@ -1,18 +1,3 @@
-// iterators5.rs
-//
-// Let's define a simple model to track Rustlings exercise progress. Progress
-// will be modelled using a hash map. The name of the exercise is the key and
-// the progress is the value. Two counting functions were created to count the
-// number of exercises with a given progress. Recreate this counting
-// functionality using iterators. Try not to use imperative loops (for, while).
-// Only the two iterator methods (count_iterator and count_collection_iterator)
-// need to be modified.
-//
-// Execute `rustlings hint iterators5` or use the `hint` watch subcommand for a
-// hint.
-
-// I AM NOT DONE
-
 use std::collections::HashMap;
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -35,7 +20,10 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // map is a hashmap with String keys and Progress values.
     // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
+    // 要使用迭代器来重现计数功能，可以使用filter方法过滤出具有指定进度值的元素，
+    // 并使用count方法计算满足条件的元素数量。
+    map.values().filter(|&progress| *progress == value).count()
+
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -54,7 +42,15 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // collection is a slice of hashmaps.
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
-    todo!();
+    // todo!();
+    // 需要先展平这个切片，然后再进行过滤和计数。
+    // 可以使用flat_map方法将切片中的每个HashMap转换为一个迭代器，
+    // 然后使用filter方法过滤出具有指定进度值的元素，
+    // 最后使用count方法计算满足条件的元素数量。
+    collection.into_iter()
+    .flat_map(|x| x.values())
+    .filter(|&progress| *progress == value)
+    .count()
 }
 
 #[cfg(test)]
